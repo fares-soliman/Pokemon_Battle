@@ -1,0 +1,4 @@
+Info (10281): Verilog HDL Declaration information at PokemonSelect.v(49): object "d1" differs only in case from object "D1" in the same scope File: //SRVB/Homes$/solima90/Desktop/pokemonv6/PokemonSelect.v Line: 49
+Info (10281): Verilog HDL Declaration information at PokemonSelect.v(359): object "draw_poke_2" differs only in case from object "DRAW_POKE_2" in the same scope File: //SRVB/Homes$/solima90/Desktop/pokemonv6/PokemonSelect.v Line: 359
+Info (10281): Verilog HDL Declaration information at PokemonSelect.v(359): object "draw_message" differs only in case from object "DRAW_MESSAGE" in the same scope File: //SRVB/Homes$/solima90/Desktop/pokemonv6/PokemonSelect.v Line: 359
+Info (10281): Verilog HDL Declaration information at PokemonSelect.v(359): object "draw_message2" differs only in case from object "DRAW_MESSAGE2" in the same scope File: //SRVB/Homes$/solima90/Desktop/pokemonv6/PokemonSelect.v Line: 359

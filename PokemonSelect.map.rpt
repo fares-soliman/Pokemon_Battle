@@ -1,0 +1,256 @@
+Analysis & Synthesis report for PokemonSelect
+Tue Nov 26 18:07:09 2019
+Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Messages
+  6. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++-----------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Tue Nov 26 18:07:09 2019               ;
+; Quartus Prime Version       ; 18.0.0 Build 614 04/24/2018 SJ Standard Edition ;
+; Revision Name               ; PokemonSelect                                   ;
+; Top-level Entity Name       ; PokemonSelect                                   ;
+; Family                      ; Cyclone V                                       ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                       ;
+; Total registers             ; N/A until Partition Merge                       ;
+; Total pins                  ; N/A until Partition Merge                       ;
+; Total virtual pins          ; N/A until Partition Merge                       ;
+; Total block memory bits     ; N/A until Partition Merge                       ;
+; Total PLLs                  ; N/A until Partition Merge                       ;
+; Total DLLs                  ; N/A until Partition Merge                       ;
++-----------------------------+-------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; PokemonSelect      ; PokemonSelect      ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.0.0 Build 614 04/24/2018 SJ Standard Edition
+    Info: Processing started: Tue Nov 26 18:06:36 2019
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PokemonSelect -c PokemonSelect
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file vga_pll.v
+    Info (12023): Found entity 1: vga_pll File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/vga_pll.v Line: 36
+Info (12021): Found 1 design units, including 1 entities, in source file vga_controller.v
+    Info (12023): Found entity 1: vga_controller File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/vga_controller.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file vga_address_translator.v
+    Info (12023): Found entity 1: vga_address_translator File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/vga_address_translator.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file vga_adapter.v
+    Info (12023): Found entity 1: vga_adapter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/vga_adapter.v Line: 78
+Info (12021): Found 13 design units, including 13 entities, in source file pokemonselect.v
+    Info (12023): Found entity 1: PokemonSelect File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1
+    Info (12023): Found entity 2: dataAndControl File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 92
+    Info (12023): Found entity 3: control File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 300
+    Info (12023): Found entity 4: datapath File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 651
+    Info (12023): Found entity 5: fullScreenCounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1068
+    Info (12023): Found entity 6: playerSelectCounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1096
+    Info (12023): Found entity 7: gameStartCounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1127
+    Info (12023): Found entity 8: spriteCounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1158
+    Info (12023): Found entity 9: animCounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1190
+    Info (12023): Found entity 10: messageModule File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1222
+    Info (12023): Found entity 11: RateDivider File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1254
+    Info (12023): Found entity 12: seg7 File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1284
+    Info (12023): Found entity 13: specialMoveDamageP1 File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 1294
+Info (12021): Found 2 design units, including 2 entities, in source file //srvb/homes$/solima90/documents/ecelabs/pokemonv2/drawer.v
+    Info (12023): Found entity 1: drawer File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv2/drawer.v Line: 3
+    Info (12023): Found entity 2: Xcounter File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv2/drawer.v Line: 100
+Info (12021): Found 1 design units, including 1 entities, in source file player1select.v
+    Info (12023): Found entity 1: player1select File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/player1select.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file player2.v
+    Info (12023): Found entity 1: player2 File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/player2.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file selectpokemon.v
+    Info (12023): Found entity 1: selectPokemon File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/selectPokemon.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file battle_background.v
+    Info (12023): Found entity 1: battle_background File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/battle_background.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file gamestart.v
+    Info (12023): Found entity 1: gameStart File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/gameStart.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file char.v
+    Info (12023): Found entity 1: char File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/char.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file squir.v
+    Info (12023): Found entity 1: squir File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/squir.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file bulb.v
+    Info (12023): Found entity 1: bulb File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/bulb.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file player_bulb.v
+    Info (12023): Found entity 1: player_bulb File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/player_bulb.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file player_squir.v
+    Info (12023): Found entity 1: player_squir File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/player_squir.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file player_char.v
+    Info (12023): Found entity 1: player_char File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/player_char.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file notveryeffective.v
+    Info (12023): Found entity 1: notveryeffective File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/notveryeffective.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file supereffective.v
+    Info (12023): Found entity 1: supereffective File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/supereffective.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file directhit.v
+    Info (12023): Found entity 1: directhit File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/directhit.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file criticalhit.v
+    Info (12023): Found entity 1: criticalhit File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/criticalhit.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file ember.v
+    Info (12023): Found entity 1: ember File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/ember.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file razorleaf.v
+    Info (12023): Found entity 1: razorleaf File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/razorleaf.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file watergun.v
+    Info (12023): Found entity 1: watergun File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/watergun.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file squir_moves.v
+    Info (12023): Found entity 1: squir_moves File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/squir_moves.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file char_moves.v
+    Info (12023): Found entity 1: char_moves File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/char_moves.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file bulb_moves.v
+    Info (12023): Found entity 1: bulb_moves File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/bulb_moves.v Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file tackle.v
+    Info (12023): Found entity 1: tackle File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/tackle.v Line: 39
+Warning (10236): Verilog HDL Implicit Net warning at PokemonSelect.v(236): created implicit net for "draw_background_now" File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 236
+Warning (10236): Verilog HDL Implicit Net warning at PokemonSelect.v(748): created implicit net for "pokemon1_select" File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 748
+Warning (10236): Verilog HDL Implicit Net warning at PokemonSelect.v(749): created implicit net for "pokemon2_select" File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 749
+Warning (10236): Verilog HDL Implicit Net warning at PokemonSelect.v(773): created implicit net for "y_animeCounter" File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 773
+Error (10161): Verilog HDL error at PokemonSelect.v(493): object "m2_move" is not declared. Verify the object name is correct. If the name is correct, declare the object. File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 493
+Error (10159): Verilog HDL error at PokemonSelect.v(516): "counter_enable_message" is not a task or void function File: //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.v Line: 516
+Info (144001): Generated suppressed messages file //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.map.smsg
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 2 errors, 5 warnings
+    Error: Peak virtual memory: 676 megabytes
+    Error: Processing ended: Tue Nov 26 18:07:10 2019
+    Error: Elapsed time: 00:00:34
+    Error: Total CPU time (on all processors): 00:00:28
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in //SRVB/Homes$/solima90/Documents/ECELabs/pokemonv6/PokemonSelect.map.smsg.
+
+

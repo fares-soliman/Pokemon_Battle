@@ -1,0 +1,733 @@
+module PokemonSelect
+	(
+		CLOCK_50,						//	On Board 50 MHz
+		// Your inputs and outputs here
+		KEY,							// On Board Keys
+		SW,
+		// The ports below are for the VGA output.  Do not change.
+		VGA_CLK,   						//	VGA Clock
+		VGA_HS,							//	VGA H_SYNC
+		VGA_VS,							//	VGA V_SYNC
+		VGA_BLANK_N,						//	VGA BLANK
+		VGA_SYNC_N,						//	VGA SYNC
+		VGA_R,   						//	VGA Red[9:0]
+		VGA_G,	 						//	VGA Green[9:0]
+		VGA_B   						//	VGA Blue[9:0]
+	);
+
+	input			CLOCK_50;				//	50 MHz
+	input	[3:0]	KEY;	
+	input	[9:0]	SW;	
+	// Declare your inputs and outputs here
+	// Do not change the following outputs
+	output			VGA_CLK;   				//	VGA Clock
+	output			VGA_HS;					//	VGA H_SYNC
+	output			VGA_VS;					//	VGA V_SYNC
+	output			VGA_BLANK_N;				//	VGA BLANK
+	output			VGA_SYNC_N;				//	VGA SYNC
+	output	[7:0]	VGA_R;   				//	VGA Red[7:0] Changed from 10 to 8-bit DAC
+	output	[7:0]	VGA_G;	 				//	VGA Green[7:0]
+	output	[7:0]	VGA_B;   				//	VGA Blue[7:0]
+	
+	wire resetn;
+	assign resetn = SW[0];
+	wire go = ~KEY[0];
+	
+	wire [5:0] colour;
+	wire [7:0] x;
+	wire [6:0] y;
+	
+	wire writeEn = 1'b1; 
+	
+	vga_adapter VGA(
+			.resetn(resetn),
+			.clock(CLOCK_50),
+			.colour(colour),
+			.x(x),
+			.y(y),
+			.plot(writeEn),
+			/* Signals for the DAC to drive the monitor. */
+			.VGA_R(VGA_R),
+			.VGA_G(VGA_G),
+			.VGA_B(VGA_B),
+			.VGA_HS(VGA_HS),
+			.VGA_VS(VGA_VS),
+			.VGA_BLANK(VGA_BLANK_N),
+			.VGA_SYNC(VGA_SYNC_N),
+			.VGA_CLK(VGA_CLK));
+		defparam VGA.RESOLUTION = "160x120";
+		defparam VGA.MONOCHROME = "FALSE";
+		defparam VGA.BITS_PER_COLOUR_CHANNEL = 2;
+		defparam VGA.BACKGROUND_IMAGE = "black.mif";
+		
+		
+		dataAndControl D1(CLOCK_50,resetn,~KEY[3],~KEY[2],~KEY[1],go,colour,x,y);
+		
+endmodule
+
+
+module dataAndControl(
+    input clk,
+    input resetn,
+    input select1,
+	 input select2,
+	 input select3,
+	 input go,
+	 
+	 
+	 //input [6:0] data_in,	 
+	 //input [2:0] data_inC,
+	 
+	 output [5:0] data_c,
+    output [7:0] data_x,
+	 output [6:0] data_y
+	 
+    );
+
+    // lots of wires to connect our datapath and control
+    wire control_m, control_s, control_g;
+	 wire p1_o1,p1_o2,p1_o3,p2_o1,p2_o2,p2_o3,p1s,p2s;
+	 wire first_background, fight_background, draw_poke1, draw_poke_2; 
+	 wire done_full;
+	 wire done_sprite;
+	 wire [15:0] rate1;
+	 wire [15:0] rate2;
+	 
+	 RateDivider ratedivider_big (16'b1111111111111111, rate1, clk, 0);
+	 RateDivider ratedivider_small (16'b1111111111111111, rate2, clk, 0);
+
+	 
+	 assign done_full = (rate1 == 16'b0000000000000000) ? 1 : 0;
+	 assign done_sprite = (rate2 == 16'b0000000000000000) ? 1 : 0;
+
+	 
+	 
+	 wire [6:0] data_in = 7'b0000001;
+	 //wire [2:0] data_inC;
+	 
+    control C0(
+        .clk(clk),
+        .resetn(resetn),
+        
+        .select1(select1),
+		  .select2(select2),
+		  .select3(select3),
+		  .go(go),
+		  
+		  .finished_battle_print(done_full),
+		  .finish_first_poke_print(done_sprite),
+        
+		  .p11(p1_o1),
+		  .p12(p1_o2),
+		  .p13(p1_o3),
+		  .p21(p2_o1),
+		  .p22(p2_o2),
+		  .p23(p2_o3),
+		  .p1_select(p1s),
+		  .p2_select(p2s),
+		  
+        .start(control_s),
+		  
+		  .first_background(first_background),
+		  .fight_background(fight_background),
+		  .draw_poke1(draw_poke1),
+		  .draw_poke_2(draw_poke_2)
+		  
+		
+    );
+
+    datapath D0(
+        .clk(clk),
+        .resetn(resetn),
+		  
+		  .p11(p1_o1),
+		  .p12(p1_o2),
+		  .p13(p1_o3),
+		  .p21(p2_o1),
+		  .p22(p2_o2),
+		  .p23(p2_o3),
+		  .p1_select(p1s),
+		  .p2_select(p2s),
+		  
+		  
+        .start(control_s),
+		  
+		  .first_background(first_background),
+		  .fight_background(fight_background),
+		  .draw_poke1(draw_poke1),
+		  .draw_poke_2(draw_poke_2),
+		  
+		  .data_in(data_in),
+	     //.data_inC(data_inC),
+
+		  .data_c(data_c),
+		  .data_x(data_x),
+		  .data_y(data_y)
+		  
+    );
+                
+ endmodule        
+
+
+
+module control(
+    input clk,
+    input resetn,
+    input select1, select2, select3,
+	 input go,
+	 input finished_battle_print,
+	 input finish_first_poke_print,
+
+    output reg  p11,p12,p13,p21,p22,p23,p1_select,p2_select, first_background, fight_background, draw_poke1, draw_poke_2,
+	 
+	 output reg start 
+    );
+	 
+	 reg [5:0] current_state, next_state;
+	 
+	 localparam  
+					 DRAW_BACKGROUND      = 5'd0,
+					 DRAW_BACKGROUND_WAIT = 5'd1,
+					 LOAD_POKEMON_1  		 = 5'd2,
+					 PLAYER_1_WAIT        = 5'd3,
+                LOAD_POKEMON_2       = 5'd4,
+					 PLAYER_2_WAIT        = 5'd5,
+                START_GAME        	 = 5'd6,
+					 START_GAME_WAIT    	 = 5'd7,		
+					 FIGHT_BACKGROUND_DRAW = 5'd8,
+					 FIHGT_BACKGROUND_WAIT = 5'd9,
+					 DRAW_POKE_1          = 5'd10,
+					 DRAW_POKE_2          = 5'd11;
+					 
+					 
+					 
+	 always@(*)
+    begin: state_table 
+            case (current_state)
+					 
+					 DRAW_BACKGROUND: next_state = finished_battle_print ? LOAD_POKEMON_1 : DRAW_BACKGROUND;
+					 DRAW_BACKGROUND_WAIT: next_state = finished_battle_print ? DRAW_BACKGROUND_WAIT : LOAD_POKEMON_1; 
+					 
+					 LOAD_POKEMON_1: next_state = go ? PLAYER_1_WAIT : LOAD_POKEMON_1;
+					 PLAYER_1_WAIT: next_state = go ? PLAYER_1_WAIT : LOAD_POKEMON_2;
+					 LOAD_POKEMON_2: next_state = go ? PLAYER_2_WAIT : LOAD_POKEMON_2;
+					 PLAYER_2_WAIT: next_state = go ? PLAYER_2_WAIT : START_GAME;
+					 START_GAME: next_state = go ? START_GAME_WAIT : START_GAME;
+					 START_GAME_WAIT: next_state = go ? START_GAME_WAIT : FIGHT_BACKGROUND_DRAW;
+					 
+					 FIGHT_BACKGROUND_DRAW: next_state = finished_battle_print ? DRAW_POKE_1 : FIGHT_BACKGROUND_DRAW;
+					 FIHGT_BACKGROUND_WAIT: next_state = finished_battle_print ? FIHGT_BACKGROUND_WAIT: DRAW_POKE_1;
+					 DRAW_POKE_1: next_state = finish_first_poke_print ? DRAW_POKE_2 : DRAW_POKE_1; 
+					 DRAW_POKE_2: next_state = go ? DRAW_BACKGROUND: DRAW_POKE_2;
+					 
+					 default: next_state = DRAW_BACKGROUND;
+					 
+				endcase
+	  end
+					 
+		
+	 always @(*)
+	 begin: enable_signals
+	 
+	     p11 = 1'b0;
+		  p12 = 1'b0;
+		  p13 = 1'b0;
+		  p21 = 1'b0;
+		  p22 = 1'b0;
+		  p23 = 1'b0;
+		  p1_select = 1'b0;
+		  p2_select = 1'b0;
+		  start = 1'b0;
+		  first_background = 1'b0;
+		  fight_background = 1'b0;
+		  draw_poke1 = 1'b0;
+		  draw_poke_2 = 1'b0;
+		  
+		  case (current_state)
+				
+				DRAW_BACKGROUND: first_background = 1'b1;
+				
+				LOAD_POKEMON_1: 
+					begin
+					
+						p1_select = 1'b1;
+						
+						case({select3, select2, select1}) 
+							3'b001: p11 = 1'b1;
+							3'b010: p12 = 1'b1;
+							3'b100: p13 = 1'b1;
+							default: begin
+								p11 = 1'b0;
+							   p12 = 1'b0;
+								p13 = 1'b0;
+							end
+						endcase
+					end
+				
+				LOAD_POKEMON_2: 
+					begin
+					
+						p2_select = 1'b1;
+						
+						case({select3, select2, select1}) 
+							3'b001: p21 = 1'b1;
+							3'b010: p22 = 1'b1;
+							3'b100: p23 = 1'b1;
+							default: begin
+								p21 = 1'b0;
+							   p22 = 1'b0;
+							   p23 = 1'b0;
+							end
+						endcase
+					end
+				
+            START_GAME: start = 1'b1;
+				
+            FIGHT_BACKGROUND_DRAW: fight_background = 1'b1;
+				
+				DRAW_POKE_1: draw_poke1 = 1'b1;
+				
+				DRAW_POKE_2: draw_poke_2 = 1'b1;
+				
+				
+        // default:    // don't need default since we already made sure all of our outputs were assigned a value at the start of the always block
+        endcase
+    end // enable_signals
+// current_state registers
+    always@(posedge clk)
+    begin: state_FFs
+        if(!resetn)
+            current_state <= DRAW_BACKGROUND;
+        else
+            current_state <= next_state;
+    end // state_FFS
+endmodule		  
+					 				 
+	 
+module datapath(
+	 input clk,
+    input resetn,
+
+    // input menu,
+	 input p11,p12,p13,p21,p22,p23,p1_select,p2_select,
+	 input start, first_background, fight_background, draw_poke1, draw_poke_2,
+	 
+	 input [6:0] data_in,
+	 //input [2:0] data_inC,
+	 
+	 output reg [7:0] data_x,
+	 output reg [6:0] data_y,
+	 output reg [5:0] data_c
+	 
+    );
+	 
+	 wire [7:0] x_fullScreenCounter;
+	 wire [6:0] y_fullScreenCounter;
+	 
+	 wire [7:0] x_playerSelectCounter;
+	 wire [6:0] y_playerSelectCounter;
+	 
+	 wire [7:0] x_spriteCounter;
+	 wire [6:0] y_spriteCounter;
+	 wire [5:0] colour_sprite_char;
+	 wire [5:0] colour_sprite_squir;
+	 wire [5:0] colour_sprite_bulb;
+	 
+	 wire [5:0] colour_choosing_screen;
+	 wire [5:0] colour_battling_screen;
+	 
+	 wire [14:0] address;
+	 
+	 wire [7:0] x_playerselect;
+	 wire [6:0] y_playerselect;
+	 
+	 wire [5:0] colour_player1;
+	 wire [5:0] colour_player2;
+	 wire [5:0] colour_gameStart;
+	 
+	 reg [7:0] x;
+	 reg [6:0] y;	
+	
+	 reg [1:0] chosen_one;
+	 reg [1:0] chosen_two;
+	 
+	 
+	 
+	 fullScreenCounter fullScreenCounter (x_fullScreenCounter, y_fullScreenCounter, clk);
+	 
+	 playerSelectCounter playerselect_little_window (x_playerselect, y_playerselect, clk);
+	 
+	 gameStartCounter gameStartCounter (x_playerSelectCounter, y_playerSelectCounter, clk);
+	 
+	 spriteCounter spriteCounter (x_spriteCounter, y_spriteCounter, clk);
+	 
+	 
+	 vga_address_translator translator (x, y, address);
+	 defparam translator.RESOLUTION = "160x120";
+	 
+
+	 selectPokemon selectPokemonScreen (address, clk, colour_choosing_screen);
+	 battle_background battle_background (address, clk, colour_battling_screen);
+	 
+	 player1select player1select (address, clk, colour_player1);
+	 player2 player2select (address, clk, colour_player2);
+	 
+	 char char (address, clk, colour_sprite_char);
+	 squir squir (address, clk, colour_sprite_squir);
+	 bulb bulb (address, clk, colour_sprite_bulb);
+	 
+	 gameStart gameStart (address, clk, colour_gameStart);
+	 
+	     always@(posedge clk) begin
+        if(!resetn) begin
+			   x <= 7'b0;
+				y <= 6'b0;
+            data_x <= 7'b0; 
+            data_y <= 6'b0; 
+            data_c <= 6'b0;
+				chosen_one <= 0;
+				chosen_two <= 0;
+        end
+        else begin
+				if (start) 
+					begin
+						data_x <= x_playerSelectCounter;               //ask for game start
+						data_y <= y_playerSelectCounter; 
+						x <= data_x;
+						y <= data_y;
+						data_c <= colour_gameStart;
+					end
+					
+				if (first_background)
+					begin
+						data_x <= x_fullScreenCounter;
+						data_y <= y_fullScreenCounter; 
+						x <= x_fullScreenCounter;
+						y <= y_fullScreenCounter;
+						data_c <= colour_choosing_screen;
+					end
+					
+				if (p1_select)
+					begin
+						if (p11) 
+							begin
+								x <= x_playerselect;
+								y <= y_playerselect;
+								data_x <= x_playerselect + 30;             //pick bulbasaur
+								data_y <= y_playerselect + 70;
+								data_c <= colour_player1;
+								chosen_one <= 2'b01;
+							end
+						
+						if (p12)
+							begin
+								x <= x_playerselect;
+								y <= y_playerselect;
+								data_x <= x_playerselect + 50;               //pick squirtle
+								data_y <= y_playerselect + 70; 
+								data_c <= colour_player1;
+								chosen_one <= 2'b10;
+							end	
+						if (p13)
+							begin
+								x <= x_playerselect;
+								y <= y_playerselect;
+								data_x <= x_playerselect + 100;               // pick charmander
+								data_y <= y_playerselect + 70; 
+								data_c <= colour_player1;
+								chosen_one <= 2'b11;
+							end
+					end
+				
+				if (p2_select)
+					begin
+						if (p21) 
+							begin
+								x <= x_playerselect;								     //pick bulbasaur
+								y <= y_playerselect;
+								data_x <= x_playerselect + 30;
+								data_y <= y_playerselect + 70; 
+								data_c <= colour_player2;
+								chosen_two <= 2'b01;
+							end
+						
+						if (p22)
+							begin
+								x <= x_playerselect;
+								y <= y_playerselect;
+								data_x <= x_playerselect + 50;             //pick squirtle
+								data_y <= y_playerselect + 70; 
+								data_c <= colour_player2;
+								chosen_two <= 2'b10;
+							end
+						if (p23)
+							begin
+								x <= x_playerselect;
+								y <= y_playerselect;
+								data_x <= x_playerselect + 100;
+								data_y <= y_playerselect + 70; 
+								data_c <= colour_player2;
+								chosen_two <= 2'b11;
+							end					
+					end
+				
+				
+				if (p21) 
+					begin
+						x <= x_playerselect;								     //pick bulbasaur
+						y <= y_playerselect;
+						data_x <= x_playerselect + 30;
+						data_y <= y_playerselect + 70; 
+						data_c <= colour_player2;
+						chosen_two <= 2'b01;
+					end
+				
+				if (p22)
+					begin
+						x <= x_playerselect;
+						y <= y_playerselect;
+						data_x <= x_playerselect + 50;             //pick squirtle
+						data_y <= y_playerselect + 70; 
+						data_c <= colour_player2;
+						chosen_two <= 2'b10;
+					end
+				if (p23)
+					begin
+						x <= x_playerselect;
+						y <= y_playerselect;
+						data_x <= x_playerselect + 100;
+						data_y <= y_playerselect + 70; 
+						data_c <= colour_player2;
+						chosen_two <= 2'b11;
+					end
+					
+				if (fight_background) 
+					begin
+						data_x <= x_fullScreenCounter;               //game begin
+						data_y <= y_fullScreenCounter; 
+						x <= x_fullScreenCounter;
+						y <= y_fullScreenCounter;
+						data_c <= colour_battling_screen;
+					end
+				if (draw_poke1)
+					begin
+					if (chosen_one == 2'b01)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 30;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_char;
+						end
+					if (chosen_one == 2'b10)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 30;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_bulb;
+						end
+					if (chosen_one == 2'b11)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 30;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_squir;
+						end
+					end
+				if (draw_poke_2)
+					begin
+					if (chosen_two == 2'b01)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 70;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_char;
+						end
+					
+					if (chosen_two == 2'b10)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 70;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_bulb;
+						end
+					if (chosen_two == 2'b11)
+						begin
+							x <= x_spriteCounter;
+							y <= y_spriteCounter;
+							data_x <= x_spriteCounter + 70;
+							data_y <= y_spriteCounter + 70; 
+							data_c <= colour_sprite_squir;
+						end
+					end	
+				end
+			end
+	 
+endmodule
+
+module fullScreenCounter (X, Y, clk);
+	input clk;
+	output reg [7:0] X;
+	output reg [6:0] Y;
+	
+	always @(posedge clk)
+		begin
+			
+			if (X < 160)
+				begin
+					X <= X + 1;
+					Y <= Y;
+				end
+			
+			else if (X == 160) 
+				begin 
+					X <= 0;
+					Y <= Y + 1;
+						
+				if (Y == 120)	
+					begin
+						Y <= 0;
+						X <= X;
+					end	
+				end		
+		end
+endmodule
+
+module playerSelectCounter (X, Y, clk);
+	input clk;
+	output reg [7:0] X;
+	output reg [6:0] Y;
+	
+	always @(posedge clk)
+		begin
+			
+			if (X < 50)
+				begin
+					X <= X + 1;
+					Y <= Y;
+				end
+			
+			else if (X == 50) 
+				begin 
+					X <= 0;
+					Y <= Y + 1;
+					
+					if (Y == 20)	
+						begin
+							Y <= 0;
+							X <= X;
+						end	
+				
+				end
+			
+					
+		end
+endmodule
+
+module gameStartCounter (X, Y, clk);
+	input clk;
+	output reg [7:0] X;
+	output reg [6:0] Y;
+	
+	always @(posedge clk)
+		begin
+			
+			if (X < 80)
+				begin
+					X <= X + 1;
+					Y <= Y;
+				end
+			
+			else if (X == 80) 
+				begin 
+					X <= 0;
+					Y <= Y + 1;
+					
+					if (Y == 20)	
+						begin
+							Y <= 0;
+							X <= X;
+						end	
+				
+				end
+			
+					
+		end
+endmodule
+
+module spriteCounter (X, Y, clk);
+	input clk;
+	output reg [7:0] X;
+	output reg [6:0] Y;
+
+	
+	always @(posedge clk)
+		begin
+			
+			if (X < 56)
+				begin
+					X <= X + 1;
+					Y <= Y;
+				end
+			
+			else if (X == 56) 
+				begin 
+					X <= 0;
+					Y <= Y + 1;
+					
+					if (Y == 56)	
+						begin
+							Y <= 0;
+							X <= X;
+						end	
+				
+				end
+			
+					
+		end
+endmodule
+
+module RateDivider (D, Q, clk, Clear_b);
+	input [15:0] D;
+	input clk;
+	input Clear_b;
+	output reg [15:0] Q ;
+	
+	always @(posedge clk)
+		begin
+		
+			if (Clear_b == 1'b1)
+				Q <= 0;
+				
+			else if (Q == 0)
+				
+				if (D == 0)
+					Q <= 0;
+				else
+					Q <= D;
+			
+			else
+				Q <= Q - 1;		
+		end
+
+endmodule	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+
+
+

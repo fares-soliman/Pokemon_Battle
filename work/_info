@@ -1,0 +1,439 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dW:/ECELabs/pokemonv4
+vbattle_background
+Z1 !s110 1574618851
+!i10b 1
+!s100 @@Y60FzIPQSKQXZNnYQ]L2
+Ii6ogeUmUY:dA_J?Z8e8Cf0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1574229904
+8battle_background.v
+Fbattle_background.v
+Z3 L0 39
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1574618851.000000
+!s107 battle_background.v|
+!s90 -reportprogress|300|battle_background.v|
+!i113 1
+Z5 tCvgOpt 0
+vbulb
+Z6 !s110 1574618848
+!i10b 1
+!s100 ReOIL;f38F`JOBMc=LM]e2
+IP>IFU@l_[P6V4@zTC>^E81
+R2
+R0
+w1574606807
+8bulb.v
+Fbulb.v
+R3
+R4
+r1
+!s85 0
+31
+!s108 1574618846.000000
+!s107 bulb.v|
+!s90 -reportprogress|300|bulb.v|
+!i113 1
+R5
+vchar
+!s110 1574618849
+!i10b 1
+!s100 hlAGWGjCdZ`AT`jiNaPaZ3
+I986T89eLQdYT1a>8BA7YI2
+R2
+R0
+w1574606776
+8char.v
+Fchar.v
+R3
+R4
+r1
+!s85 0
+31
+Z7 !s108 1574618849.000000
+!s107 char.v|
+!s90 -reportprogress|300|char.v|
+!i113 1
+R5
+vcontrol
+Z8 !s110 1574618845
+!i10b 1
+!s100 kTDRflhYEZDkC5nZ@ah[b1
+IRCd895R4>0Mn8DbQ8m8UL0
+R2
+R0
+Z9 w1574618704
+Z10 8PokemonSelect.v
+Z11 FPokemonSelect.v
+L0 175
+R4
+r1
+!s85 0
+31
+Z12 !s108 1574618844.000000
+Z13 !s107 PokemonSelect.v|
+Z14 !s90 -reportprogress|300|PokemonSelect.v|
+!i113 1
+R5
+vdataAndControl
+R8
+!i10b 1
+!s100 ^LQNjhZZ@Q9V1Z>O05hOD2
+Il4Kc4c5AE7el8gH338OR]2
+R2
+R0
+R9
+R10
+R11
+L0 69
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+ndata@and@control
+vdatapath
+R8
+!i10b 1
+!s100 nXS_5Wb6cceeiDC1MNcm40
+IM^?F@`64VWBWKG@g2>5kV0
+R2
+R0
+R9
+R10
+R11
+L0 305
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+vfullScreenCounter
+R8
+!i10b 1
+!s100 cK59z?>2=a[nhaFzPFGRS0
+IcLLQ]_F4O=SVH62YTk5lF2
+R2
+R0
+R9
+R10
+R11
+L0 541
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+nfull@screen@counter
+vgameStart
+Z15 !s110 1574618850
+!i10b 1
+!s100 iAon[Jaf2Rb@K1bg;E@8T3
+I[Z?lg60iHW4c69=oIXFTk0
+R2
+R0
+w1574272108
+8gameStart.v
+FgameStart.v
+R3
+R4
+r1
+!s85 0
+31
+R7
+!s107 gameStart.v|
+!s90 -reportprogress|300|gameStart.v|
+!i113 1
+R5
+ngame@start
+vgameStartCounter
+R8
+!i10b 1
+!s100 2_b5EQP<=MZCmeP_OVS^`0
+I?<7D5TjHd3E1PNMRP[JjE0
+R2
+R0
+R9
+R10
+R11
+L0 600
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+ngame@start@counter
+vplayer1select
+R15
+!i10b 1
+!s100 KG_iD?[fbWz3nmBB<_b^[1
+Ib]ZA6?eIZc6M?a1cPZ_k=1
+R2
+R0
+w1574238393
+8player1select.v
+Fplayer1select.v
+R3
+R4
+r1
+!s85 0
+31
+Z16 !s108 1574618850.000000
+!s107 player1select.v|
+!s90 -reportprogress|300|player1select.v|
+!i113 1
+R5
+vplayer2
+R1
+!i10b 1
+!s100 Y8e13V8D<k6ZjmDBSUYKO3
+IQoeQlF[6QG7TlZo5Yz6mO1
+R2
+R0
+w1574237846
+8player2.v
+Fplayer2.v
+R3
+R4
+r1
+!s85 0
+31
+R16
+!s107 player2.v|
+!s90 -reportprogress|300|player2.v|
+!i113 1
+R5
+vplayerSelectCounter
+R8
+!i10b 1
+!s100 k?[>?Jm=SaNjVe_P[;Nfb1
+Ii^LHYOX`jBK[_6I=46Roo2
+R2
+R0
+R9
+R10
+R11
+L0 569
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+nplayer@select@counter
+vPokemonSelect
+R8
+!i10b 1
+!s100 3=3_^n3iE?[S4><Qj<Yg:2
+IkDBS1CL0i_lSloohh_j2_3
+R2
+R0
+R9
+R10
+R11
+L0 1
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+n@pokemon@select
+vRateDivider
+R8
+!i10b 1
+!s100 DQY=]GYO3]^DcJaXm72?o1
+IWWeRABi`L><dnl8e9>hY]1
+R2
+R0
+R9
+R10
+R11
+L0 663
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+n@rate@divider
+vselectPokemon
+!s110 1574618852
+!i10b 1
+!s100 kjgozozimkclUnbaYdRCV3
+I7bZmC=HWM5156E9UEJHm=0
+R2
+R0
+w1574227996
+8selectPokemon.v
+FselectPokemon.v
+R3
+R4
+r1
+!s85 0
+31
+!s108 1574618852.000000
+!s107 selectPokemon.v|
+!s90 -reportprogress|300|selectPokemon.v|
+!i113 1
+R5
+nselect@pokemon
+vspriteCounter
+R8
+!i10b 1
+!s100 3kH9FYOb:clDM:0QKMXEe1
+I1N_;A8oca6UN9>:?Wga]?2
+R2
+R0
+R9
+R10
+R11
+L0 631
+R4
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 1
+R5
+nsprite@counter
+vsquir
+R6
+!i10b 1
+!s100 hLVNOW^8CF>PBnUnQTEOk3
+IejGdgZP4bM;TM0OBean7Y3
+R2
+R0
+w1574606844
+8squir.v
+Fsquir.v
+R3
+R4
+r1
+!s85 0
+31
+!s108 1574618848.000000
+!s107 squir.v|
+!s90 -reportprogress|300|squir.v|
+!i113 1
+R5
+vvga_adapter
+!s110 1574618853
+!i10b 1
+!s100 <7=XhF3W_4ED1TAQc3WXJ2
+I0;>icRVzD4@P=;:gdeDPj1
+R2
+R0
+w1574606032
+8vga_adapter.v
+Fvga_adapter.v
+L0 78
+R4
+r1
+!s85 0
+31
+Z17 !s108 1574618853.000000
+!s107 vga_adapter.v|
+!s90 -reportprogress|300|vga_adapter.v|
+!i113 1
+R5
+vvga_address_translator
+Z18 !s110 1574618855
+!i10b 1
+!s100 C0DfW0_9[5co`@boeR]Pi1
+ISe:<A`WEfVWVQ^XdIYXSb3
+R2
+R0
+Z19 w1573589628
+8vga_address_translator.v
+Fvga_address_translator.v
+L0 4
+R4
+r1
+!s85 0
+31
+!s108 1574618855.000000
+!s107 vga_address_translator.v|
+!s90 -reportprogress|300|vga_address_translator.v|
+!i113 1
+R5
+vvga_controller
+!s110 1574618854
+!i10b 1
+!s100 e6ZP6iRSUQ77>][ahP0EJ1
+ITS]5dFPCKSB?gH[b`;iOY3
+R2
+R0
+R19
+8vga_controller.v
+Fvga_controller.v
+L0 9
+R4
+r1
+!s85 0
+31
+R17
+!s107 vga_controller.v|
+!s90 -reportprogress|300|vga_controller.v|
+!i113 1
+R5
+vvga_pll
+R18
+!i10b 1
+!s100 4XSTjD`VEiamX^n1@5J`b3
+InS4CFLIEOHD9AEaVkoljA1
+R2
+R0
+R19
+8vga_pll.v
+Fvga_pll.v
+L0 36
+R4
+r1
+!s85 0
+31
+!s108 1574618854.000000
+!s107 vga_pll.v|
+!s90 -reportprogress|300|vga_pll.v|
+!i113 1
+R5
