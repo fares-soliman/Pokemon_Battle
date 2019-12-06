@@ -4,10 +4,10 @@
 
 
 <p align = "middle">
-<img src='./README_Images/pokemonselect.jpg' width=50%>
-<img src='./README_Images/pokemonbattle.jpg' width=50%>
-<img src='./README_Images/ember.jpg' width=50%>
+<img src='./README_Images/pokemonselect.jpg' width=40%>
+<img src='./README_Images/pokemonbattle.jpg' width=40%>
+<img src='./README_Images/ember.jpg' width=40%>
 
 </p>
 
-A simple Pokemon Battle simulator using Verilog and an FPGA
+## A simple Pokemon Battle simulator using Verilog and an FPGA
