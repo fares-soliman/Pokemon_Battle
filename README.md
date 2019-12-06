@@ -10,4 +10,4 @@
 
 </p>
 
-## A simple Pokemon Battle simulator using Verilog and an FPGA
+## A simple Pokemon Battle simulator using Verilog and the DE1-SOC FPGA
